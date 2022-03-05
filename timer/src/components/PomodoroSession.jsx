@@ -11,17 +11,27 @@ export default class PomodoroSession extends React.Component {
       type: TYPE,
       time: TIME
     }
+    this.changeSession = this.changeSession.bind(this);
+    this.startSession = this.startSession.bind(this);
   }
+  changeSession(e) {
+    console.log(e.target.value);
+  }
+  startSession() {
+
+  }
+
   render() {
     return (
       <div className={"session_root_container"}>
         <div className={"session_type_container"}>
           {this.state.type.map((currType, idx) => {
-            return <button key={idx} className={"session-item"} type={"button"}>{currType}</button>
+            return <button key={idx} className={"session-item"} type={"button"}
+                           value={currType} onClick={this.changeSession}>{currType}</button>
           })}
         </div>
-        <h1 className={"session-time"}>{this.state.time[0]}</h1>
-        <input className={"session-start"} type={"button"} placeholder={"START"} />
+        <h1 className={"session-time"}>{this.state.time[1]}</h1>
+        <button className={"session-start"} type={"button"} placeholder={"START"}>Begin</button>
       </div>
     )
   }

@@ -18,12 +18,21 @@
 .session-item {
     white-space: nowrap;
     background: transparent;
-    /*border: none;*/
-    border-radius: .25vw;
-    color: pink;
+    border: none;
+    border-radius: .35vw;
+    color: white;
     font-size: 17px;
-    width: 100px;
+    width: 110px;
     height: 50px;
+}
+.session-item:hover {
+    background-color: pink;
+    cursor: pointer;
+}
+.session-item:focus {
+    background-color: pink;
+    color: mediumslateblue;
+    font-weight: bold;
 }
 .session-time {
     font-size: 90px;
@@ -33,4 +42,20 @@
     font-size: 17px;
     width: 125px;
     height: 50px;
+}
+.session-start {
+    background: white;
+    border: none;
+    border-radius: .3vw;
+    width: 180px;
+    height: 50px;
+    box-shadow: 0 9px #666;
+}
+.session-start:hover {
+    background-color: pink;
+}
+.session-start:focus {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }

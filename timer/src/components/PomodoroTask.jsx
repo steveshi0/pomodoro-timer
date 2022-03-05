@@ -8,10 +8,13 @@ export default class PomodoroTask extends React.Component {
       task: []
     }
   }
-
   render() {
     return (
-      <div>My Tasks to work on</div>
+      <div>
+        <h2>blah 1: Eat</h2>
+        <h2>blah 2: Sleep</h2>
+        <h2>blah 3: Repeat</h2>
+      </div>
     )
   }
 }

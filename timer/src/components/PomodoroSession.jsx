@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './PomodoroSession.css';
 
 const TYPE = ["Work Time", "Short Break", "Long Break"];

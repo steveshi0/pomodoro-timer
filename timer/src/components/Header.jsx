@@ -12,7 +12,7 @@ const Header = () => {
   return(
     <div>
       <h1 style={header_style}>
-        Your Tomato Clock
+        Your Tomato Timer
       </h1>
       {/*<img src={"./Header-tomato.png"} alt={"header-cool-tomato"} />*/}  {/** Not Working */}
     </div>

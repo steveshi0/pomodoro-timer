@@ -1,14 +1,13 @@
 import './App.css';
-
 import Header from "./components/Header";
-import PomodoroSession from "./components/PomodoroSession";
+import PomodoroSession, {TYPE} from "./components/PomodoroSession";
 import PomodoroTask from "./components/PomodoroTask";
 
 function App() {
   return (
     <div id={"pomodoro_timer"} style={{alignItems: 'center'}}>
       <Header />
-      <PomodoroSession />
+      <PomodoroSession defaultSessionNum={0}/>
       <PomodoroTask />
     </div>
   );

@@ -29,21 +29,21 @@
     background-color: pink;
     cursor: pointer;
 }
-.session-item:focus {
-    background-color: pink;
-    color: mediumslateblue;
-    font-weight: bold;
+@media (max-width: 400px) {
+    .session-item {
+        border-radius: 1vw;
+    }
 }
 .session-time {
     font-size: 90px;
     margin: 10%;
 }
-.session-start {
+#session-start {
     font-size: 17px;
     width: 125px;
     height: 50px;
 }
-.session-start {
+#session-start {
     background: white;
     border: none;
     border-radius: .3vw;
@@ -51,11 +51,20 @@
     height: 50px;
     box-shadow: 0 9px #666;
 }
-.session-start:hover {
+#session-start:hover {
     background-color: pink;
 }
-.session-start:focus {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+@media (max-width: 400px) {
+    #session-start {
+        margin-bottom: 20px;
+        border-radius: 2vw;
+    }
+}
+.session-selected {
+    background-color: pink;
+    color: mediumslateblue;
+    font-weight: bold;
+}
+.start-on {
+    background-color: black;
 }

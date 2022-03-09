@@ -16,18 +16,20 @@ export default class PomodoroSession extends React.Component {
       countingDown: false
     }
     this.handleSessionChange = this.handleSessionChange.bind(this);
+    this.handleSessionChangeStyling = this.handleSessionChangeStyling.bind(this);
     this.handleSessionStart = this.handleSessionStart.bind(this);
+    this.handleSessionStartStyling = this.handleSessionStartStyling.bind(this);
   }
+
+  // Make a type of Pomodoro Session change
   handleSessionChange(e) {
     if (this.state.countingDown) {
-      const res = window.confirm("Switching will end current unfinished session");
-      if (!res.valueOf()) {
+      if (!window.confirm("Switching will end current unfinished session").valueOf()) {
         return;
       }
     }
     const newSessionNum = TYPE.indexOf(e.target.value);
-    document.getElementById("session-item" + this.state.sessionNum).classList.remove("session-selected");
-    document.getElementById("session-item" + newSessionNum).classList.add("session-selected");
+    this.handleSessionChangeStyling(newSessionNum);
     this.setState({
       sessionNum: newSessionNum,
       minutes: TIME[newSessionNum],
@@ -35,37 +37,60 @@ export default class PomodoroSession extends React.Component {
       countingDown: false
     });
   }
+  handleSessionChangeStyling(newSessionNum) {
+    document.getElementById("session-item" + this.state.sessionNum).classList.remove("session-selected");
+    document.getElementById("session-item" + newSessionNum).classList.add("session-selected");
+  }
+
+  // Start button behaviors when clicked on
   handleSessionStart(e) {
-    if (this.state.countingDown) {
-      document.getElementById(e.target.id).classList.add("session-start-on");
-    } else {
-      document.getElementById(e.target.id).classList.remove("session-start-on");
-    }
     this.setState((prevState) => ({
       countingDown: !prevState.countingDown
     }));
+    this.handleSessionStartStyling();
   }
+  handleSessionStartStyling() {
+    const containsPressed = document.getElementById("session-start").classList.contains("session-start-on");
+    if (!containsPressed) {
+      document.getElementById("session-start").classList.add("session-start-on");
+    } else {
+      document.getElementById("session-start").classList.remove("session-start-on");
+    }
+  }
+
+/*  printTime() {
+    return
+    <h1>
+      {this.state.minutes > 0 ? this.state.minutes : "00"}:{(this.state.seconds === 0) ? this.state.seconds + "0"
+      : (this.state.seconds < 10)
+        ? "0" + Number.toString(this.state.seconds) : this.state.seconds}
+    </h1>
+  }*/
 
   // Mount when the user click on Start button
   componentDidMount() {
     document.getElementById("session-item" + this.state.sessionNum).classList.add("session-selected");
     this.countDownInterval = setInterval(() => {
-      if (this.state.seconds > 0 && this.state.countingDown) {
+      if (this.state.countingDown && this.state.seconds > 0) {
         this.setState((prevState) => ({
           seconds: prevState.seconds - 1
         }));
-      } else if (this.state.minutes > 0 && this.state.countingDown) {
+      } else if (this.state.countingDown && this.state.minutes > 0) {
         this.setState((prevState) => ({
           minutes: prevState.minutes - 1,
           seconds: 59
         }));
-      } else if (this.state.countingDown) {
+      } else if (this.state.countingDown && this.state.minutes === 0 && this.state.seconds === 0) {
+        this.handleSessionChangeStyling((this.state.sessionNum + 1) % 3);
+        this.handleSessionStartStyling();
         this.setState((prevState) => ({
-          sessionNum: (prevState.sessionNum === 2) ? 0 : prevState.sessionNum + 1,
-          minutes: (prevState.minutes === 25) ? 5 : (prevState.minutes === 5) ? 15 : 25
-        }))
+          sessionNum: (prevState.sessionNum + 1) % 3,
+          minutes: TIME[(prevState.sessionNum + 1) % 3],
+          seconds: 0,
+          countingDown: false
+        }));
       }
-    }, 1000);
+    }, 1);
   }
   componentWillUnmount() {
     clearInterval(this.countDownInterval);
@@ -81,9 +106,9 @@ export default class PomodoroSession extends React.Component {
           })}
         </div>
         <h1 className={"session-time"}>
-          {this.state.minutes}:{(this.state.seconds === 0) ? this.state.seconds + "0"
+          {this.state.minutes > 0 ? this.state.minutes : "00"}:{(this.state.seconds === 0) ? this.state.seconds + "0"
             : (this.state.seconds < 10)
-              ? "0" + Number.toString(this.state.seconds) : this.state.seconds}
+              ? "0" + this.state.seconds : this.state.seconds}
         </h1>
         <button id={"session-start"} type={"button"} placeholder={"START"} value={"start"}
                 onClick={this.handleSessionStart}>{!this.state.countingDown ? "Start" : "Pause"}</button>

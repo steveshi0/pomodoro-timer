@@ -5,7 +5,12 @@ import './PomodoroSession.css';
 export const TYPE = ["Work Time", "Short Break", "Long Break"];
 export const TIME = [25, 5, 15];
 
-// The session will start at Work Time with 25 minutes
+/**
+ * Session Component that contains the 3 differen type of pomo-sessions(work, short-break, long-break),
+ * timer for the respective session along with the start/pause button.
+ * Default-value of Work time(25 minutes) or whatever session-number that is passed in as the prop
+ * refer to the TYPE/TIME const for the respective sessions.
+ */
 export default class PomodoroSession extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +26,8 @@ export default class PomodoroSession extends React.Component {
     this.handleSessionStartStyling = this.handleSessionStartStyling.bind(this);
   }
 
-  // Make a type of Pomodoro Session change
+  // Switch among the different sessions(Work, Short-break, Long-break)
+  // Handle the styling of the session type btn when another is set to be the new session
   handleSessionChange(e) {
     if (this.state.countingDown) {
       if (!window.confirm("Switching will end current unfinished session").valueOf()) {
@@ -42,7 +48,8 @@ export default class PomodoroSession extends React.Component {
     document.getElementById("session-item" + newSessionNum).classList.add("session-selected");
   }
 
-  // Start button behaviors when clicked on
+  // Start the current session with the timer counting down
+  // Handle the styling of the start btn when it is clicked to be started and paused
   handleSessionStart(e) {
     this.setState((prevState) => ({
       countingDown: !prevState.countingDown
@@ -57,15 +64,6 @@ export default class PomodoroSession extends React.Component {
       document.getElementById("session-start").classList.remove("session-start-on");
     }
   }
-
-/*  printTime() {
-    return
-    <h1>
-      {this.state.minutes > 0 ? this.state.minutes : "00"}:{(this.state.seconds === 0) ? this.state.seconds + "0"
-      : (this.state.seconds < 10)
-        ? "0" + Number.toString(this.state.seconds) : this.state.seconds}
-    </h1>
-  }*/
 
   // Mount when the user click on Start button
   componentDidMount() {

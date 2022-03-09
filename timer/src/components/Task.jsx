@@ -9,8 +9,9 @@ const taskStyle = {
 const Task = (props) => {
   return(
     <div style={taskStyle}>
-      {/*<input type={"checkbox"} />
-      <textarea>Sleep like your about to die</textarea>*/}
+      <h1>EAT</h1>
+      <h1>SLEEP</h1>
+      <h1>REPEAT</h1>
     </div>
   )
 }

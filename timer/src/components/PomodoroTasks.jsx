@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './PomodoroTasks.css';
 import Task from './Task.jsx';
 
@@ -11,28 +11,33 @@ const PomodoroTasks = () => {
       "重复"
   ]);
   const randomSmilingFace = <span id={"random-smiling-face"} style={{fontSize: "1000px"}}>&#129322;</span>
+  const randomTask = ["Sew something", "Play a game", "Get drunk", "Build a quantum computer", "Watch a movie", "Meditate",
+    "Read a book", "Waste time by Watch funny Youtube vidoes", "Sing along to your favorite hits", "Play with your pet",
+    "Try new hairstyles", "Fly a kite", "Visit an arcade", "Hunt some ghost", "Learn a magic trick", "Go roller skating",
+    "Go on a road trip", "Go for picnic", "Go bowling", "Have a water fight with a stranger", "Create a playlist",
+    "Make a slip 'n slide", "Make a gift list", "Play twister", "Browse Reddit for 10 years", "Daydream"];
 
   // add(), delete(), check/uncheck() from the taskList
   function addTask(e) {
     document.getElementById("add-task-input").value="";
-    if (newTask.length !== 0 && taskList.indexOf(newTask) === -1) {
+    if (newTask.length === 0) {
+      giverUserRandomTask();
+    } else if (taskList.indexOf(newTask) > -1) {
+      window.alert("Enter a valid task that is that not already exist within the task list");
+    } else {
       setTaskList([...taskList, newTask]);
       setTask("");
-    } else {
-      window.alert("Enter a valid task that is either not empty or already exist within the task list");
     }
   }
   function deleteTask(taskNumber) {
-    setTaskList(taskList.filter(currTask => currTask != taskList[taskNumber]));
+    setTaskList(taskList.filter(currTask => currTask !== taskList[taskNumber]));
   }
-  /*function checkTask(e) { // UNFINISHED
-    const currBtn = document.getElementById(e.target.id).classList;
-    if (currBtn.contains("finished_task")) {
-      currBtn.remove("finished_task");
-    } else {
-      currBtn.add("finished_task");
-    }
-  }*/
+
+  function giverUserRandomTask() {
+    window.alert("Why must you enter a blank task into the list??🥴\n" +
+      "Since the I'm a cool timer, a random task gonna be added to the list 🤡🤡");
+    setTaskList([randomTask[Math.floor(Math.random() * (25 - 0 + 1) + 0)], ...taskList]);
+  }
   
   // return the current task to pomodoro_timer within app.js
   return(
@@ -43,7 +48,14 @@ const PomodoroTasks = () => {
         })}
       </div>
       <div id={"add-task-container"}>
-        <input id={"add-task-input"} type={"text"} placeholder={"️✍️ New task go here ✍️"} onChange={(e) => setTask(e.target.value)}/>
+        <input id={"add-task-input"} type={"text"} placeholder={"️✍️ New task go here ✍️"} onChange={(e) => {
+          setTask(e.target.value);
+          /*e.target.addEventListener("keydown", event => {
+            if (event.keyCode == 13 && e.target.value.length !== 0) {
+              setTaskList((prevTaskList) => [...prevTaskList, e.target.value]);
+            }
+          })*/
+        }}/>
         <button id={"add-task-btn"} type={"button"} onClick={addTask}>+</button>
       </div>
     </div>

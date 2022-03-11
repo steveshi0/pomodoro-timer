@@ -32,9 +32,10 @@ tasks-root-container (div)
      border: none;
      font-size: 20px;
      height: 56px;
-     width: 290px;
+     width: 300px;
      margin-bottom: 15px;
      margin-right: 2px;
+
  }
  #add-task-input:active {
      border: none;

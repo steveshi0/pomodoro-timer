@@ -1,0 +1,38 @@
+ #tasks-root-container {
+  display: flex;
+  flex-direction: column;
+  background: #f0584d;
+  border-radius: 1vw;
+  padding: 2.5vw 4vw;
+  margin: 1%;
+  color: white;
+  font-family: Arial, serif;
+  align-items: flex-end;
+ }
+ @media (max-width: 400px) {
+  #tasks-root-container {
+   padding: 2.5vw 2vw;
+  }
+ }
+ #task-list-container {
+  float: inherit;
+ }
+ #add-task-btn {
+  cursor: pointer;
+  white-space: nowrap;
+  background: hotpink;
+  border: none;
+  border-radius: .5vw;
+  color: white;
+  font-size: 40px;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 6px #666;
+ }
+ #add-task-btn:active {
+  box-shadow: 0 2px #666 !important;
+  transform: translateY(4px);;
+ }
+ .finished_task {
+  background-color: black;
+ }

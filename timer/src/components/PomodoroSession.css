@@ -2,8 +2,8 @@
     /*background: linear-gradient(to right, #BD3F32, #CB356B);*/
     background: #f0584d;
     border-radius: 1vw;
-    padding: 2.5% 4%;
-    margin: 1%;
+    padding: 2.5vw 4vw;
+    margin: 1% 1%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,16 +39,12 @@
     margin: 10%;
 }
 #session-start {
-    font-size: 17px;
-    width: 125px;
-    height: 50px;
-}
-#session-start {
+    font-size: 30px;
     background: white;
     border: none;
     border-radius: .3vw;
     width: 180px;
-    height: 50px;
+    height: 55px;
     box-shadow: 0 9px #999;
     cursor: pointer;
 }

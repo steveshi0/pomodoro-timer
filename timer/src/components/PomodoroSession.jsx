@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './PomodoroSession.css';
 
 // Different type of pomodoro session and their correponding time periods
 export const TYPE = ["Work Time", "Short Break", "Long Break"];
 export const TIME = [25, 5, 15];
+let number = 0;
 
 /**
  * Session Component that contains the 3 differen type of pomo-sessions(work, short-break, long-break),
@@ -93,6 +94,11 @@ export default class PomodoroSession extends React.Component {
   componentWillUnmount() {
     clearInterval(this.countDownInterval);
   }
+  /*shouldComponentUpdate(nextProps, nextState, nextContext) {
+    number++;
+    console.log(number + " " + nextState.minutes + ":" + nextState.seconds);
+    return nextState.seconds <= 60;
+  }*/
 
   render() {
     return (

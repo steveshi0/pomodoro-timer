@@ -66,16 +66,6 @@ export default class PomodoroSession extends React.Component {
     }
   }
 
-  showResetButton() {
-    if (!this.state.countingDown) {
-      if (this.state.minutes < TIME[this.state.sessionNum]
-        || (this.state.minutes == TIME[this.state.sessionNum] && this.state.seconds != 0)) {
-        return(
-          <button type={"button"} placeholder={"RESET"} value={"reset"} onClick={console.log("dshif s")}>RESET</button> )
-      }
-    }
-  }
-
   // Mount when the user click on Start button
   componentDidMount() {
     document.getElementById("session-item" + this.state.sessionNum).classList.add("session-selected");
@@ -99,7 +89,7 @@ export default class PomodoroSession extends React.Component {
           countingDown: true
         }));
       }
-    }, 1000);
+    }, 1);
   }
   componentWillUnmount() {
     clearInterval(this.countDownInterval);
@@ -126,7 +116,6 @@ export default class PomodoroSession extends React.Component {
         </h1>
         <button id={"session-start"} type={"button"} placeholder={"START"} value={"start"}
                 onClick={this.handleSessionStart}>{!this.state.countingDown ? "Start" : "Pause"}</button>
-        {this.showResetButton()}
       </div>
     )
   }

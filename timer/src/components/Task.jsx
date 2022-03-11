@@ -13,12 +13,13 @@ const individualTaskStyle = {
   height: "30px"
 };
 const taskFinishStyle = {
+  cursor: "pointer",
   width: "40px",
   height: "35px",
-  border: "none",
   borderRadius: "50%",
   justifyContent: "right",
-  justifySelf: "end"
+  justifySelf: "end",
+  background: "#76B947",
 };
 
 /**
@@ -28,7 +29,7 @@ const taskFinishStyle = {
  * @constructor none
  */
 const Task = (props) => {
-  console.log(props);
+  //console.log(props);
   return(
     <div style={taskStyle}>
       <p id={"individual-task-num" + props.taskNum} className={"individual_task"} style={individualTaskStyle}>

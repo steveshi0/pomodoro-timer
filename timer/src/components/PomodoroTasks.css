@@ -9,12 +9,12 @@ tasks-root-container (div)
 #tasks-root-container {
     display: flex;
     flex-direction: column;
-    background: #f0584d;
     border-radius: 1vw;
-    padding: 2.5vw 4vw;
+    padding: 0 4vw;
     margin: 1%;
     color: white;
     font-family: Arial, serif;
+    font-weight: bold;
  }
  @media (max-width: 400px) {
      #tasks-root-container {
@@ -23,28 +23,31 @@ tasks-root-container (div)
          padding-bottom: 40px;
      }
  }
- #task-list-container {
-  float: inherit;
- }
  #add-task-container {
      display: flex;
-
+     margin-top: 20px;
  }
  #add-task-input {
+     background-color: lightpink;
+     border: none;
      font-size: 20px;
-     height: 50px;
+     height: 56px;
      width: 290px;
+     margin-bottom: 15px;
+     margin-right: 2px;
+ }
+ #add-task-input:active {
+     border: none;
  }
  #add-task-btn {
      cursor: pointer;
      white-space: nowrap;
      background: hotpink;
      border: none;
-     border-radius: .5vw;
      color: white;
      font-size: 40px;
      width: 50px;
-     height: 56px;
+     height: 58px;
  }
  #add-task-btn:active {
   box-shadow: 0 2px #666 !important;

@@ -25,15 +25,14 @@ const PomodoroTasks = () => {
   function deleteTask(taskNumber) {
     setTaskList(taskList.filter(currTask => currTask != taskList[taskNumber]));
   }
-
-  function checkTask(e) { // UNFINISHED
+  /*function checkTask(e) { // UNFINISHED
     const currBtn = document.getElementById(e.target.id).classList;
     if (currBtn.contains("finished_task")) {
       currBtn.remove("finished_task");
     } else {
       currBtn.add("finished_task");
     }
-  }
+  }*/
   
   // return the current task to pomodoro_timer within app.js
   return(

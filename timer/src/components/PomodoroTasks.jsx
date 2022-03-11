@@ -6,13 +6,15 @@ const PomodoroTasks = () => {
   // TaskList containing all Task component that will be shown on the screen
   const [newTask, setTask] = useState("");
   const [taskList, setTaskList] = useState([
-      "EAT A LOT OF FOOD",
-      "SLEEP A LOT OF SLEEP",
-      "REPEAT UNTIL INEVITABLE DEATH"
+      "吃",
+      "睡",
+      "重复"
   ]);
+  const randomSmilingFace = <span id={"random-smiling-face"} style={{fontSize: "1000px"}}>&#129322;</span>
 
   // add(), delete(), check/uncheck() from the taskList
-  function addTask() {
+  function addTask(e) {
+    document.getElementById("add-task-input").value="";
     if (newTask.length !== 0 && taskList.indexOf(newTask) === -1) {
       setTaskList([...taskList, newTask]);
       setTask("");
@@ -42,7 +44,7 @@ const PomodoroTasks = () => {
         })}
       </div>
       <div id={"add-task-container"}>
-        <input id={"add-task-input"} type={"text"} placeholder={newTask} onChange={(e) => setTask(e.target.value)}/>
+        <input id={"add-task-input"} type={"text"} placeholder={"️✍️ New task go here ✍️"} onChange={(e) => setTask(e.target.value)}/>
         <button id={"add-task-btn"} type={"button"} onClick={addTask}>+</button>
       </div>
     </div>

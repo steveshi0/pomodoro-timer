@@ -16,6 +16,12 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 400px) {
+  #pomodoro_timer {
+    margin: 10% 2%;
+  }
+}
+
 
 
 /**

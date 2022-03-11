@@ -63,6 +63,6 @@
     font-weight: bold;
 }
 .session-start-on {
-    box-shadow: 0 5px #666 !important;
-    transform: translateY(4px);
+    box-shadow: 0 0px #666 !important;
+    transform: translateY(9px);
 }

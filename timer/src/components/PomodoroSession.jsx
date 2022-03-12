@@ -90,7 +90,7 @@ export default class PomodoroSession extends React.Component {
           countingDown: true
         }));
       }
-    }, 1);
+    }, 1000);
   }
   componentWillUnmount() {
     clearInterval(this.countDownInterval);

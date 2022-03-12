@@ -8,6 +8,7 @@ const PomodoroTasks = () => {
   const [taskList, setTaskList] = useState([
       "吃",
       "睡",
+      "玩",
       "重复"
   ]);
   const randomSmilingFace = <span id={"random-smiling-face"} style={{fontSize: "1000px"}}>&#129322;</span>

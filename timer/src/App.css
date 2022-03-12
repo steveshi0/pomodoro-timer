@@ -22,6 +22,12 @@ body {
   background-size: cover;
 }
 
+@media (max-width: 400px) {
+  body, .backgroundNum_0, .backgroundNum_1, .backgroundNum_3 {
+    background-size: auto;
+  }
+}
+
 #pomodoro_timer {
   display: flex;
   flex-direction: column;

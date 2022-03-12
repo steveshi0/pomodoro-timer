@@ -10,7 +10,7 @@ const taskStyle = {
 const individualTaskStyle = {
   float: "right",
   width: "300px",
-  height: "30px"
+  height: "60px"
 };
 const taskFinishStyle = {
   cursor: "pointer",

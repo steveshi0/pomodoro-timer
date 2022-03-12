@@ -47,6 +47,7 @@ export default class PomodoroSession extends React.Component {
   handleSessionChangeStyling(newSessionNum) {
     document.getElementById("session-item" + this.state.sessionNum).classList.remove("session-selected");
     document.getElementById("session-item" + newSessionNum).classList.add("session-selected");
+    this.props.backgroundNum(newSessionNum);
   }
 
   // Start the current session with the timer counting down

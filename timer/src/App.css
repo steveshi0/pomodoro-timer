@@ -3,11 +3,25 @@
 }
 
 body {
-  background: #CB356B;
+  /*background: #CB356B;
   background: -webkit-linear-gradient(to right, #BD3F32, #CB356B);
-  background: linear-gradient(to right, #BD3F32, #CB356B);
+  background: linear-gradient(to right, #BD3F32, #CB356B);*/
+  background: url("./imgs/session-work.jpg") no-repeat center fixed;
+  background-size: cover;
 }
-/** Rem, Em, Percentage (%), View-width (vw) and View-height */
+.backgroundNum_0 {
+  background: url("./imgs/session-work.jpg") no-repeat center fixed;
+  background-size: cover;
+}
+.backgroundNum_1 {
+  background-image: url("./imgs/session-short-break.jpg");
+  background-size: cover;
+}
+.backgroundNum_2{
+  background-image: url("./imgs/session-long-break.jpg");
+  background-size: cover;
+}
+
 #pomodoro_timer {
   display: flex;
   flex-direction: column;

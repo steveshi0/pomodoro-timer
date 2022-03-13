@@ -1,5 +1,4 @@
 .session_root_container {
-    /*background: linear-gradient(to right, #BD3F32, #CB356B);*/
     background: #f0584d;
     border-radius: 1vw;
     padding: 2.5vw 4vw;
@@ -63,6 +62,6 @@
     font-weight: bold;
 }
 .session-start-on {
-    box-shadow: 0 0px #666 !important;
+    box-shadow: 0 0 #666 !important;
     transform: translateY(9px);
 }

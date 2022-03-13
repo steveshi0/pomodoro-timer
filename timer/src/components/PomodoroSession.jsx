@@ -1,11 +1,10 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import './PomodoroSession.css';
 
 // Different type of pomodoro session and their correponding time periods
 export const TYPE = ["Work Time", "Short Break", "Long Break"];
 export const TIME = [25, 5, 15];
-let number = 0;
-
+let studyNum = 0;
 /**
  * Session Component that contains the 3 differen type of pomo-sessions(work, short-break, long-break),
  * timer for the respective session along with the start/pause button.
@@ -25,6 +24,7 @@ export default class PomodoroSession extends React.Component {
     this.handleSessionChangeStyling = this.handleSessionChangeStyling.bind(this);
     this.handleSessionStart = this.handleSessionStart.bind(this);
     this.handleSessionStartStyling = this.handleSessionStartStyling.bind(this);
+    this.printTime = this.printTime.bind(this);
   }
 
   // Switch among the different sessions(Work, Short-break, Long-break)
@@ -67,6 +67,16 @@ export default class PomodoroSession extends React.Component {
     }
   }
 
+  // Print the current timer in ##:## format
+  printTime() {
+    let minutes = (this.state.minutes) > 0 ? this.state.minutes : "00";
+    let seconds = (this.state.seconds === 0) ? this.state.seconds + "0"
+      : (this.state.seconds < 10)
+        ? "0" + this.state.seconds : this.state.seconds;
+
+    return minutes + ":" + seconds
+  }
+
   // Mount when the user click on Start button
   componentDidMount() {
     document.getElementById("session-item" + this.state.sessionNum).classList.add("session-selected");
@@ -81,15 +91,39 @@ export default class PomodoroSession extends React.Component {
           seconds: 59
         }));
       } else if (this.state.countingDown && this.state.minutes === 0 && this.state.seconds === 0) {
-        this.handleSessionChangeStyling((this.state.sessionNum + 1) % 3);
-        //this.handleSessionStartStyling();
-        this.setState((prevState) => ({
-          sessionNum: (prevState.sessionNum + 1) % 3,
-          minutes: TIME[(prevState.sessionNum + 1) % 3],
-          seconds: 0,
-          countingDown: true
-        }));
+        if (this.state.sessionNum === 0) {
+          studyNum++;
+        }
+        if (studyNum === 4) {
+          this.handleSessionChangeStyling(2);
+          this.setState({
+            sessionNum: 2,
+            minutes: TIME[2],
+            seconds: 0,
+            countingDown: true
+          });
+          studyNum = 0;
+        } else if (studyNum !== 4){
+          if (this.state.sessionNum === 2) {
+            this.handleSessionChangeStyling(0);
+            this.setState({
+              sessionNum: 0,
+              minutes: TIME[0],
+              seconds: 0,
+              countingDown: true
+            });
+          } else {
+            this.handleSessionChangeStyling((this.state.sessionNum == 0) ? 1 : 0);
+            this.setState((prevState) => ({
+              sessionNum: prevState.sessionNum === 0 ? 1 : 0,
+              minutes: TIME[prevState.sessionNum === 0 ? 1 : 0],
+              seconds: 0,
+              countingDown: true
+            }));
+          }
+        }
       }
+      document.title = "Tomata Timer " + this.printTime();
     }, 1000);
   }
   componentWillUnmount() {
@@ -111,9 +145,7 @@ export default class PomodoroSession extends React.Component {
           })}
         </div>
         <h1 className={"session-time"}>
-          {this.state.minutes > 0 ? this.state.minutes : "00"}:{(this.state.seconds === 0) ? this.state.seconds + "0"
-            : (this.state.seconds < 10)
-              ? "0" + this.state.seconds : this.state.seconds}
+          {this.printTime()}
         </h1>
         <button id={"session-start"} type={"button"} placeholder={"START"} value={"start"}
                 onClick={this.handleSessionStart}>{!this.state.countingDown ? "Start" : "Pause"}</button>

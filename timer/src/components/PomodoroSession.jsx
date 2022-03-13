@@ -123,7 +123,9 @@ export default class PomodoroSession extends React.Component {
           }
         }
       }
-      document.title = "Tomata Timer " + this.printTime();
+      var tabTyle = (this.state.sessionNum == 0) ? "Time to Grind"
+        : (this.state.sessionNum === 1) ? "A Short Break" : "Relax for a Long time";
+      document.title = this.printTime() + " - " + tabTyle;
     }, 1000);
   }
   componentWillUnmount() {

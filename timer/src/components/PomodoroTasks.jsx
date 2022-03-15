@@ -6,12 +6,12 @@ const PomodoroTasks = () => {
   // TaskList containing all Task component that will be shown on the screen
   const [newTask, setTask] = useState("");
   const [taskList, setTaskList] = useState([
-      "吃🍔🍣",
-      "睡😪💤",
-      "玩🤪👻",
-      "重复⏳⌛⏳⌛⏳⌛⏳⌛"
+      "(Default)吃🍔🍣",
+      "(Default)睡😪💤",
+      "(Default)玩🤪👻",
+      "(Default)重复⏳⌛⏳⌛"
   ]);
-  const randomSmilingFace = <span id={"random-smiling-face"} style={{fontSize: "1000px"}}>&#129322;</span>
+
   const randomTask = ["Sew something", "Play a game", "Get drunk", "Build a quantum computer", "Watch a movie", "Meditate",
     "Read a book", "Waste time by Watch funny Youtube vidoes", "Sing along to your favorite hits", "Play with your pet",
     "Try new hairstyles", "Fly a kite", "Visit an arcade", "Hunt some ghost", "Learn a magic trick", "Go roller skating",
@@ -34,10 +34,11 @@ const PomodoroTasks = () => {
     setTaskList(taskList.filter(currTask => currTask !== taskList[taskNumber]));
   }
 
+  // Give the user a random task when a blank task is entered
   function giverUserRandomTask() {
     window.alert("Why must you enter a blank task into the list??🥴\n" +
       "Since the I'm a cool timer, a random task gonna be added to the list 🤡🤡");
-    setTaskList([randomTask[Math.floor(Math.random() * (25 - 0 + 1) + 0)], ...taskList]);
+    setTaskList([randomTask[Math.floor(Math.random() * (25 + 1))], ...taskList]);
   }
   
   // return the current task to pomodoro_timer within app.js
@@ -51,16 +52,10 @@ const PomodoroTasks = () => {
       <div id={"add-task-container"}>
         <input id={"add-task-input"} type={"text"} placeholder={"️✍️ New task go here ✍️"} onChange={(e) => {
           setTask(e.target.value);
-          /*e.target.addEventListener("keydown", event => {
-            if (event.keyCode == 13 && e.target.value.length !== 0) {
-              setTaskList((prevTaskList) => [...prevTaskList, e.target.value]);
-            }
-          })*/
         }}/>
         <button id={"add-task-btn"} type={"button"} onClick={addTask}>+</button>
       </div>
     </div>
   )
 }
-
 export default PomodoroTasks;

@@ -5,9 +5,10 @@ import './PomodoroSession.css';
 export const TYPE = ["Work Time", "Short Break", "Long Break"];
 export const TIME = [25, 5, 15];
 let studyNum = 0;
+
 /**
  * Session Component that contains the 3 differen type of pomo-sessions(work, short-break, long-break),
- * timer for the respective session along with the start/pause button.
+ * timer for the respective session along with the start/pause button
  * Default-value of Work time(25 minutes) or whatever session-number that is passed in as the prop
  * refer to the TYPE/TIME const for the respective sessions.
  */
@@ -77,65 +78,70 @@ export default class PomodoroSession extends React.Component {
     return minutes + ":" + seconds
   }
 
+  // Lifecycle of pomodoro timer: every 4 study session will result in a long-break, all other are Study -> Short break
+  pomodoroLifeCycle() {
+    if (this.state.countingDown && this.state.seconds > 0) {
+      this.setState((prevState) => ({
+        seconds: prevState.seconds - 1
+      }));
+    } else if (this.state.countingDown && this.state.minutes > 0) {
+      this.setState((prevState) => ({
+        minutes: prevState.minutes - 1,
+        seconds: 59
+      }));
+    } else if (this.state.countingDown && this.state.minutes === 0 && this.state.seconds === 0) {
+      if (this.state.sessionNum === 0) {
+        studyNum++;
+      }
+      if (studyNum === 4) {
+        this.handleSessionChangeStyling(2);
+        this.setState({
+          sessionNum: 2,
+          minutes: TIME[2],
+          seconds: 0,
+          countingDown: true
+        });
+        studyNum = 0;
+      } else if (studyNum !== 4){
+        if (this.state.sessionNum === 2) {
+          this.handleSessionChangeStyling(0);
+          this.setState({
+            sessionNum: 0,
+            minutes: TIME[0],
+            seconds: 0,
+            countingDown: true
+          });
+        } else {
+          this.handleSessionChangeStyling((this.state.sessionNum == 0) ? 1 : 0);
+          this.setState((prevState) => ({
+            sessionNum: prevState.sessionNum === 0 ? 1 : 0,
+            minutes: TIME[prevState.sessionNum === 0 ? 1 : 0],
+            seconds: 0,
+            countingDown: true
+          }));
+        }
+      }
+    }
+  }
+
+  // Tab Title
+  setTabTile() {
+    var tabTyle = (this.state.sessionNum == 0) ? "Time to Grind"
+      : (this.state.sessionNum === 1) ? "A Short Break" : "Relax for a Long time";
+    document.title = this.printTime() + " - " + tabTyle;
+  }
+
   // Mount when the user click on Start button
   componentDidMount() {
     document.getElementById("session-item" + this.state.sessionNum).classList.add("session-selected");
     this.countDownInterval = setInterval(() => {
-      if (this.state.countingDown && this.state.seconds > 0) {
-        this.setState((prevState) => ({
-          seconds: prevState.seconds - 1
-        }));
-      } else if (this.state.countingDown && this.state.minutes > 0) {
-        this.setState((prevState) => ({
-          minutes: prevState.minutes - 1,
-          seconds: 59
-        }));
-      } else if (this.state.countingDown && this.state.minutes === 0 && this.state.seconds === 0) {
-        if (this.state.sessionNum === 0) {
-          studyNum++;
-        }
-        if (studyNum === 4) {
-          this.handleSessionChangeStyling(2);
-          this.setState({
-            sessionNum: 2,
-            minutes: TIME[2],
-            seconds: 0,
-            countingDown: true
-          });
-          studyNum = 0;
-        } else if (studyNum !== 4){
-          if (this.state.sessionNum === 2) {
-            this.handleSessionChangeStyling(0);
-            this.setState({
-              sessionNum: 0,
-              minutes: TIME[0],
-              seconds: 0,
-              countingDown: true
-            });
-          } else {
-            this.handleSessionChangeStyling((this.state.sessionNum == 0) ? 1 : 0);
-            this.setState((prevState) => ({
-              sessionNum: prevState.sessionNum === 0 ? 1 : 0,
-              minutes: TIME[prevState.sessionNum === 0 ? 1 : 0],
-              seconds: 0,
-              countingDown: true
-            }));
-          }
-        }
-      }
-      var tabTyle = (this.state.sessionNum == 0) ? "Time to Grind"
-        : (this.state.sessionNum === 1) ? "A Short Break" : "Relax for a Long time";
-      document.title = this.printTime() + " - " + tabTyle;
+      this.pomodoroLifeCycle();
+      this.setTabTile();
     }, 1000);
   }
   componentWillUnmount() {
     clearInterval(this.countDownInterval);
   }
-  /*shouldComponentUpdate(nextProps, nextState, nextContext) {
-    number++;
-    console.log(number + " " + nextState.minutes + ":" + nextState.seconds);
-    return nextState.seconds <= 60;
-  }*/
 
   render() {
     return (

@@ -6,10 +6,10 @@ const PomodoroTasks = () => {
   // TaskList containing all Task component that will be shown on the screen
   const [newTask, setTask] = useState("");
   const [taskList, setTaskList] = useState([
-      "(Default)吃🍔🍣",
-      "(Default)睡😪💤",
-      "(Default)玩🤪👻",
-      "(Default)重复⏳⌛⏳⌛"
+      "(Default)Eat🍔🍣",
+      "(Default)Sleep😪💤",
+      "(Default)Play🤪👻",
+      "(Default)Repeat⏳⌛⏳⌛"
   ]);
 
   const randomTask = ["Sew something", "Play a game", "Get drunk", "Build a quantum computer", "Watch a movie", "Meditate",
